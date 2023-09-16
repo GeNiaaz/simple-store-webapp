@@ -1,15 +1,19 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const port = 3000;
-const db = require('./models');
-const productsRoutes = require('./routes/productsRoutes');
+const port = 3001;
+const db = require("./models");
+const cors = require("cors");
+const productsRoutes = require("./routes/productsRoutes");
 
 app.use(express.json());
-app.use(express.urlencoded({
-extended: true
-}));
+app.use(cors());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
-app.use('/products', productsRoutes);
+app.use("/products", productsRoutes);
 
 db.sequelize.sync().then((res) => {
   app.listen(port, () => {
