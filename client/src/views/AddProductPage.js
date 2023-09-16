@@ -1,18 +1,29 @@
 import { Route, Routes, Switch, Router, BrowserRouter } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import "./AddProductPage.css";
+import Axios from "axios";
 
 function AddProductPage(props) {
   const [Name, setName] = useState("");
   const [Price, setPrice] = useState(0);
   const [Description, setDescription] = useState("");
-  const [Quantity, setQuantity] = useState(0);
+  const [Stock_Quantity, setStockQuantity] = useState(0);
+  const [Category, setCategory] = useState("");
 
   const handleAddProduct = () => {
-    console.log(Name);
-    console.log(Price);
-    console.log(Description);
-    console.log(Quantity);
+    Axios.post("http://localhost:3001/products", {
+      name: Name,
+      price: Price,
+      description: Description,
+      stock_quantity: Stock_Quantity,
+      category: Category,
+    })
+      .then(() => {
+        console.log("success");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -43,7 +54,14 @@ function AddProductPage(props) {
         <input
           type="number"
           onChange={(event) => {
-            setQuantity(event.target.value);
+            setStockQuantity(event.target.value);
+          }}
+        />
+        <label>Category:</label>
+        <input
+          type="text"
+          onChange={(event) => {
+            setCategory(event.target.value);
           }}
         />
         <button onClick={handleAddProduct}>Add Product</button>
