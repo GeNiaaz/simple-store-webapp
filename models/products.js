@@ -9,17 +9,17 @@ module.exports = (sequelize,DataTypes) => {
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         description: DataTypes.STRING,
         price: {
             type: DataTypes.DECIMAL(10,2),
-            allowNull: false,
+            allowNull: false
         },
         category: DataTypes.STRING,
         stock_quantity: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: false
         },
     });
 
