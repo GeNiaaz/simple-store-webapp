@@ -15,6 +15,7 @@ const EditProductModal = ({ product, closeModal }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    console.log(editedProduct);
     if (ValidateInput(editedProduct)) {
       Axios.put(`http://localhost:3001/products/${editedProduct.product_id}`, {
         ...editedProduct,

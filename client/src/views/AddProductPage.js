@@ -1,6 +1,7 @@
 import { Route, Routes, Switch, Router, BrowserRouter } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import "./AddProductPage.css";
+import { ValidateInput } from "../utils/Validation";
 import Axios from "axios";
 
 function AddProductPage(props) {
@@ -11,19 +12,28 @@ function AddProductPage(props) {
   const [Category, setCategory] = useState("");
 
   const handleAddProduct = () => {
-    Axios.post("http://localhost:3001/products", {
+    const prod = {
       name: Name,
-      price: Price,
       description: Description,
-      stock_quantity: Stock_Quantity,
+      price: Price,
       category: Category,
-    })
-      .then(() => {
-        console.log("success");
+      stock_quantity: Stock_Quantity,
+    };
+    if (ValidateInput(prod)) {
+      Axios.post("http://localhost:3001/products", {
+        name: Name,
+        price: Price,
+        description: Description,
+        stock_quantity: Stock_Quantity,
+        category: Category,
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then(() => {
+          console.log("success");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (

@@ -19,7 +19,14 @@ function AdminViewProductsPage(props) {
     setIsModalOpen(true);
   };
 
-  console.log(isModalOpen);
+  const handleDeleteProduct = (product) => {
+    setSelectedProduct(product);
+    Axios.delete(
+      `http://localhost:3001/products/${selectedProduct.product_id}`
+    );
+    console.log("product deleted");
+    getProducts();
+  };
 
   return (
     <div className="AdminViewProductsPage">
@@ -37,7 +44,9 @@ function AdminViewProductsPage(props) {
               </div>
               <div>
                 <button onClick={() => handleEditProduct(prod)}>Edit</button>
-                <button>Delete</button>
+                <button onClick={() => handleDeleteProduct(prod)}>
+                  Delete
+                </button>
               </div>
             </div>
           );
