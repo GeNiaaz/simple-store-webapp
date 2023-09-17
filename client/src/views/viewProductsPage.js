@@ -1,6 +1,7 @@
 import "./ViewProductsPage.css";
-import { useState } from "react";
+import { React, useState } from "react";
 import Axios from "axios";
+import Navbar from "../components/Navbar";
 
 function ViewProductsPage(props) {
   const [ProductsList, setProductsList] = useState([]);
@@ -12,6 +13,7 @@ function ViewProductsPage(props) {
 
   return (
     <div className="ViewProductsPage">
+      <Navbar />
       <div className="products">
         <button onClick={getProducts}>Refresh Products</button>
 

@@ -1,5 +1,5 @@
-import { Route, Routes, Switch, Router, BrowserRouter } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import Navbar from "../components/Navbar";
 import "./AddProductPage.css";
 import { ValidateInput } from "../utils/Validation";
 import Axios from "axios";
@@ -40,6 +40,7 @@ function AddProductPage(props) {
 
   return (
     <div className="AddProductPage">
+      <Navbar />
       <div className="ProductInformation">
         <label>Name:</label>
         <input

@@ -1,5 +1,6 @@
 import "./AdminViewProductsPage.css";
 import EditProductModal from "../components/EditProductModal";
+import Navbar from "../components/Navbar";
 import { useState } from "react";
 import Axios from "axios";
 import Swal from "sweetalert2";
@@ -32,6 +33,7 @@ function AdminViewProductsPage(props) {
 
   return (
     <div className="AdminViewProductsPage">
+      <Navbar />
       <div className="products">
         <button onClick={getProducts}>Refresh Products</button>
         {ProductsList.map((prod, key) => {
