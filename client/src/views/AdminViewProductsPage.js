@@ -2,6 +2,7 @@ import "./AdminViewProductsPage.css";
 import EditProductModal from "../components/EditProductModal";
 import { useState } from "react";
 import Axios from "axios";
+import Swal from "sweetalert2";
 
 function AdminViewProductsPage(props) {
   const [ProductsList, setProductsList] = useState([]);
@@ -25,13 +26,14 @@ function AdminViewProductsPage(props) {
       `http://localhost:3001/products/${selectedProduct.product_id}`
     );
     console.log("product deleted");
+    Swal.fire("Product deleted successfully");
     getProducts();
   };
 
   return (
     <div className="AdminViewProductsPage">
       <div className="products">
-        <button onClick={getProducts}>Show Products</button>
+        <button onClick={getProducts}>Refresh Products</button>
         {ProductsList.map((prod, key) => {
           return (
             <div className="product">
@@ -55,6 +57,7 @@ function AdminViewProductsPage(props) {
           <EditProductModal
             product={selectedProduct}
             closeModal={() => setIsModalOpen(false)}
+            refreshProducts={setProductsList}
           />
         )}
       </div>

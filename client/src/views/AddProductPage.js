@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./AddProductPage.css";
 import { ValidateInput } from "../utils/Validation";
 import Axios from "axios";
+import Swal from "sweetalert2";
 
 function AddProductPage(props) {
   const [Name, setName] = useState("");
@@ -29,6 +30,7 @@ function AddProductPage(props) {
       })
         .then(() => {
           console.log("success");
+          Swal.fire("Product added successfully");
         })
         .catch((err) => {
           console.log(err);

@@ -4,12 +4,18 @@ import Axios from "axios";
 import Swal from "sweetalert2";
 import { ValidateInput } from "../utils/Validation";
 
-const EditProductModal = ({ product, closeModal }) => {
+const EditProductModal = ({ product, closeModal, refreshProducts }) => {
   const [editedProduct, setEditedProduct] = useState({ ...product });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditedProduct({ ...editedProduct, [name]: value });
+  };
+
+  const getProducts = (p) => {
+    Axios.get("http://localhost:3001/products").then((response) => {
+      p(response.data);
+    });
   };
 
   const handleSubmit = (e) => {
@@ -23,6 +29,7 @@ const EditProductModal = ({ product, closeModal }) => {
         .then((response) => {
           if (response.status === 200) {
             console.log("product updated successfully");
+            getProducts(refreshProducts);
             closeModal();
           } else {
             Swal.fire(`Response status: ${response.status}, please try again`);
@@ -34,6 +41,7 @@ const EditProductModal = ({ product, closeModal }) => {
           console.log(err);
         });
 
+      getProducts(refreshProducts);
       closeModal();
     }
   };

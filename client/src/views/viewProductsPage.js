@@ -13,7 +13,7 @@ function ViewProductsPage(props) {
   return (
     <div className="ViewProductsPage">
       <div className="products">
-        <button onClick={getProducts}>Show Products</button>
+        <button onClick={getProducts}>Refresh Products</button>
 
         {ProductsList.map((val, key) => {
           return (
