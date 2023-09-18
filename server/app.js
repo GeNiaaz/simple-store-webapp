@@ -1,3 +1,4 @@
+const dotenv = require("dotenv");
 const helmet = require("helmet");
 const express = require("express");
 const app = express();
@@ -7,6 +8,7 @@ const xss = require("xss-clean");
 const cors = require("cors");
 const productsRoutes = require("./routes/productsRoutes");
 
+dotenv.config({ path: "./.env" });
 app.use(express.json());
 
 // SECURE HTTP HEADERS

@@ -1,9 +1,0 @@
-{
-  "development": {
-    "username": "root",
-    "password": "Sg9%MC$HRAkv&P5",
-    "database": "store_items",
-    "host": "localhost",
-    "dialect": "mysql"
-  }
-}
