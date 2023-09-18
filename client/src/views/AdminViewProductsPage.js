@@ -1,9 +1,11 @@
 import "./AdminViewProductsPage.css";
 import EditProductModal from "../components/EditProductModal";
 import Navbar from "../components/Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Axios from "axios";
 import Swal from "sweetalert2";
+import AddProductModal from "./AddProductModal";
+import { FaTimes, FaPencilAlt } from "react-icons/fa";
 
 function AdminViewProductsPage(props) {
   const [ProductsList, setProductsList] = useState([]);
@@ -14,11 +16,18 @@ function AdminViewProductsPage(props) {
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const handleEditProduct = (product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
+  };
+
+  console.log(isAddProductModalOpen);
+
+  const handleAddProduct = () => {
+    setIsAddProductModalOpen(true);
   };
 
   const handleDeleteProduct = (product) => {
@@ -27,38 +36,62 @@ function AdminViewProductsPage(props) {
       .then(() => {
         console.log("success");
         Swal.fire("Product deleted successfully");
+        getProducts();
       })
       .catch((err) => {
         console.log(err);
         Swal.fire("Error deleting product");
+        getProducts();
       });
     getProducts();
   };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   return (
     <div className="AdminViewProductsPage">
       <Navbar />
       <div className="products">
-        <button onClick={getProducts}>Refresh Products</button>
-        {ProductsList.map((prod, key) => {
-          return (
-            <div className="product">
-              <div>
-                <h3>Name: {prod.name}</h3>
-                <h3>Price: ${prod.price}</h3>
-                <h3>Description: {prod.description}</h3>
-                <h3>Stock_Quantity: {prod.stock_quantity}</h3>
-                <h3>Category: {prod.category}</h3>
+        <h1>Manage Products</h1>
+        <div className="product-grid">
+          {ProductsList.map((prod, key) => {
+            if (prod.description.length > 90) {
+              prod.description = prod.description.substring(0, 90) + "...";
+            }
+            return (
+              <div className="product">
+                <div className="product-card" key={key}>
+                  <div
+                    className="close-icon"
+                    onClick={() => handleDeleteProduct(prod)}
+                  >
+                    <FaTimes />
+                  </div>
+                  <div
+                    className="edit-icon"
+                    onClick={() => handleEditProduct(prod)}
+                  >
+                    <FaPencilAlt />
+                  </div>
+                  <div className="product-header">
+                    <h2>{prod.name}</h2>
+                    <h2>${prod.price}</h2>
+                  </div>
+                  <div className="product-footer">
+                    <mark>{prod.category}</mark>
+                    <h3>Stocks: {prod.stock_quantity}</h3>
+                  </div>
+                  <div className="product-description">
+                    <p>{prod.description}</p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <button onClick={() => handleEditProduct(prod)}>Edit</button>
-                <button onClick={() => handleDeleteProduct(prod)}>
-                  Delete
-                </button>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+
         {isModalOpen && (
           <EditProductModal
             product={selectedProduct}
@@ -66,7 +99,16 @@ function AdminViewProductsPage(props) {
             refreshProducts={setProductsList}
           />
         )}
+        {isAddProductModalOpen && (
+          <AddProductModal
+            closeAddProductModal={() => setIsAddProductModalOpen(false)}
+            refreshProducts={setProductsList}
+          />
+        )}
       </div>
+      <button onClick={() => handleAddProduct()} className="add-button">
+        +
+      </button>
     </div>
   );
 }
