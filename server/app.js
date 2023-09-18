@@ -7,6 +7,7 @@ const db = require("./models");
 const xss = require("xss-clean");
 const cors = require("cors");
 const productsRoutes = require("./routes/productsRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 dotenv.config({ path: "./.env" });
 app.use(express.json());
@@ -28,6 +29,7 @@ app.use(
 );
 
 app.use("/products", productsRoutes);
+app.use("/auth", authRoutes);
 
 db.sequelize.sync().then((res) => {
   app.listen(port, () => {
