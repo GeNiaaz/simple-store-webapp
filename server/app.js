@@ -1,11 +1,23 @@
+const helmet = require("helmet");
 const express = require("express");
 const app = express();
 const port = 3001;
 const db = require("./models");
+const xss = require("xss-clean");
 const cors = require("cors");
 const productsRoutes = require("./routes/productsRoutes");
 
 app.use(express.json());
+
+// SECURE HTTP HEADERS
+app.use(helmet());
+
+// sanitization against XSS
+app.use(xss());
+
+// sanitization against SQL injection
+app.use(require("sanitize").middleware);
+
 app.use(cors());
 app.use(
   express.urlencoded({
