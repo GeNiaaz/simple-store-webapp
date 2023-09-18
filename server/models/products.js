@@ -8,11 +8,17 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
-        len: [1, 17],
+        len: [3, 17],
       },
     },
-    description: DataTypes.STRING,
+    description: {
+      type: DataTypes.STRING,
+      validate: {
+        len: [3, 90],
+      },
+    },
     price: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
@@ -20,12 +26,19 @@ module.exports = (sequelize, DataTypes) => {
         len: [1, 7],
       },
     },
-    category: DataTypes.STRING,
+    category: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [2, 12],
+      },
+    },
     stock_quantity: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        len: [3, 255],
+        min: 0,
+        max: 9999,
       },
     },
   });
