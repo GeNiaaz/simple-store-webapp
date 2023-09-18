@@ -23,11 +23,15 @@ function AdminViewProductsPage(props) {
 
   const handleDeleteProduct = (product) => {
     setSelectedProduct(product);
-    Axios.delete(
-      `http://localhost:3001/products/${selectedProduct.product_id}`
-    );
-    console.log("product deleted");
-    Swal.fire("Product deleted successfully");
+    Axios.delete(`http://localhost:3001/products/${product.product_id}`)
+      .then(() => {
+        console.log("success");
+        Swal.fire("Product deleted successfully");
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire("Error deleting product");
+      });
     getProducts();
   };
 

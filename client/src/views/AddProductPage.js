@@ -34,6 +34,7 @@ function AddProductPage(props) {
         })
         .catch((err) => {
           console.log(err);
+          Swal.fire("Error adding product");
         });
     }
   };
