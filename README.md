@@ -20,16 +20,12 @@ Signing in to an admin role simply requires clicking on login on the top right a
 
 User can also choose to return home from the sign in page by clicking the link below the Login button.
 
-** Important Point **
-Because my tables are created by the NodeJS backend after it connects to the MySQL database, I am unable to pre-populate the MySQL database with Docker Compose. As a result, I created a sign up page in the frontend for the express purpose of demonstration. Access to this page is by adding /signup to the URL. Note: This is NOT meant to be a part of the final app, it is simply to facilitate testing, and allow testing to be done by adding an admin.
+You may use either of these to sign in to the app, they have been prepopulated into the database when the `docker-compose` file is run.
 
-Sample admin credentials to add on the `/signup` page with:
-
-| NO  | USERNAME | PASSWORD     |
-| --- | -------- | ------------ |
-| 1   | Laval    | password     |
-| 2   | Niaaz    | 4jv94j490v44 |
-| 3   | Ishak    | Hello123     |
+| NO  | USERNAME | PASSWORD |
+| --- | -------- | -------- |
+| 1   | Laval    | password |
+| 2   | Ishak    | Hello123 |
 
 ### How to deploy app on a cloud environment
 
