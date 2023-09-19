@@ -54,7 +54,6 @@ function AdminViewProductsPage(props) {
     <div className="AdminViewProductsPage">
       <Navbar />
       <div className="products">
-        <h1>Manage Products</h1>
         <div className="product-grid">
           {ProductsList.map((prod, key) => {
             if (prod.description.length > 90) {
