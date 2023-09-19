@@ -53,6 +53,7 @@ const AddProductModal = ({ closeAddProductModal, refreshProducts }) => {
     <div className="AddProductModal">
       <div className="ProductInformation">
         <h2>Add Product</h2>
+
         <label>Name:</label>
         <input
           type="text"
