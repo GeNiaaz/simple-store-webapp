@@ -31,10 +31,9 @@ async function checkAuth(req, res) {
       if (await bcrypt.compare(req.body.password, user.password_hash)) {
         res.send("User authenticated");
       } else {
-        res.send("Not allowed");
+        return res.status(401).send("User not authenticated");
       }
     } else {
-      res.send("User not found");
       return res.status(400).send("User not found");
     }
   } catch (error) {
