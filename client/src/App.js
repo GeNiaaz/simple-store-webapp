@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import ViewProductsPage from "./views/ViewProductsPage";
 import AdminViewProductsPage from "./views/AdminViewProductsPage";
+import LoginPage from "./views/LoginPage";
+import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
   return (
@@ -18,7 +20,8 @@ function App() {
             <Switch>
               <Redirect exact from="/" to="/products" />
               <Route path="/products" component={ViewProductsPage} />
-              <Route path="/edit" component={AdminViewProductsPage} />
+              <PrivateRoute path="/edit" component={AdminViewProductsPage} />
+              <Route path="/login" component={LoginPage} />
             </Switch>
           </div>
         </div>
