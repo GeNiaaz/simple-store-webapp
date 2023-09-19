@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ./client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./server
+    env_file:
+      - ./server/.env
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Password12345
+      MYSQL_DATABASE: store_items
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-init-scripts:/docker-entrypoint-initdb.d
