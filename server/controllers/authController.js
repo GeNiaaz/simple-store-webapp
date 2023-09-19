@@ -1,8 +1,9 @@
 const db = require("../models");
 const { auth } = db;
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-async function createAuth(req, res) {
+async function authSignup(req, res) {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
@@ -19,7 +20,7 @@ async function createAuth(req, res) {
   }
 }
 
-async function checkAuth(req, res) {
+async function authLogin(req, res) {
   try {
     const user = await auth.findOne({
       where: {
@@ -29,7 +30,10 @@ async function checkAuth(req, res) {
 
     if (user) {
       if (await bcrypt.compare(req.body.password, user.password_hash)) {
-        res.send("User authenticated");
+        // jwt generation
+        const user = { username: req.body.username };
+        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+        res.json({ accessToken: accessToken });
       } else {
         return res.status(401).send("User not authenticated");
       }
@@ -42,7 +46,28 @@ async function checkAuth(req, res) {
   }
 }
 
+async function authToken(req, res) {
+  try {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+
+    if (token == null) return res.sendStatus(401);
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+      if (err) return res.sendStatus(403);
+
+      req.user = user;
+
+      res.send("User token validated");
+    });
+  } catch (error) {
+    res.json(error);
+    console.log(error);
+  }
+}
+
 module.exports = {
-  createAuth,
-  checkAuth,
+  authSignup,
+  authLogin,
+  authToken,
 };
