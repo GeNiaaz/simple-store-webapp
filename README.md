@@ -3,8 +3,8 @@
 ### Steps to run the application
 
 1. Clone the repository on your machine `git clone git@github.com:GeNiaaz/simple-store-webapp.git`
-2. Make sure Docker is installed
-3. Open a terminal and cd into the cloned repo, then run `docker compose up -d`
+2. Make sure Docker and docker-compose are installed
+3. Open a terminal and cd into the cloned repo, then run `docker-compose up -d`
 
 ### Using the application
 
