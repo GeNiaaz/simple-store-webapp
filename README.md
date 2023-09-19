@@ -5,9 +5,6 @@
 1. Clone the repository on your machine `git clone git@github.com:GeNiaaz/simple-store-webapp.git`
 2. Make sure Docker is installed
 3. Open a terminal and cd into the cloned repo, then run `docker compose up -d`
-4. Open another terminal and cd into `/client` and run `npm start`
-5. Open another terminal and cd into `/server` and run `npm start`
-6. Access the application at `http://localhost:3000`
 
 ### Using the application
 
