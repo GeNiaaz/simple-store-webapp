@@ -38,7 +38,7 @@ async function authLogin(req, res) {
         return res.status(401).send("User not authenticated");
       }
     } else {
-      return res.status(400).send("User not found");
+      return res.status(410).send("User not found");
     }
   } catch (error) {
     res.json(error);
