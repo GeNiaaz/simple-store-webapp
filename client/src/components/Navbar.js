@@ -6,20 +6,22 @@ import "./Navbar.css";
 
 function Navbar() {
   const navRef = useRef();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  };
 
   return (
     <header>
-      <h3>Uncle Ben's Store</h3>
+      <h2>Uncle Ishak's Store</h2>
       <nav ref={navRef}>
-        <a href="/products">
-          <IoStorefrontSharp></IoStorefrontSharp> Products
-        </a>
-        <a href="/">
-          <IoLogIn></IoLogIn> Login
-        </a>
-        <a href="/#">
-          <IoLogOut></IoLogOut> Logout
-        </a>
+        {localStorage.getItem("token") ? (
+          <button onClick={handleLogout}>Logout</button>
+        ) : (
+          <a href="/login">
+            <button>Login</button>
+          </a>
+        )}
       </nav>
     </header>
   );
