@@ -19,7 +19,6 @@ function ViewProductsPage(props) {
     <div className="ViewProductsPage">
       <Navbar />
       <div className="products">
-        <h1>Products</h1>
         <div className="product-grid">
           {ProductsList.map((prod, key) => {
             if (prod.description.length > 90) {
